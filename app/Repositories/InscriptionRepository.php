@@ -40,6 +40,8 @@ class InscriptionRepository extends BaseRepository
         'career_year',
         'establishment',
         'establishment_city',
+        'student_certificate',
+        'anses_negative',
         'mother_lastname',
         'mother_name',
         'mother_birthday',

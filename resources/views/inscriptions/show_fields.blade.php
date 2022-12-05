@@ -161,6 +161,24 @@
                         <p><strong>Ciudad del establecimiento: </strong>{{ $inscription->establishment_city }}</p>
                     </div>
 
+               
+                    @if (Auth::user()->type == 'Member')
+                        <div class="col-md-6">
+                            <a href="{{ route('download.student.certificate') }}" class="btn btn-info">Descargar certificado alumno regular</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ route('download.anses.negative') }}" class="btn btn-info">Descargar negativa anses</a>
+                        </div>
+                    @else
+                        <div class="col-md-6">
+                            <a href="{{ route('student.certificate.download.admin', $inscription->user_id) }}" class="btn btn-info">Descargar certificado alumno regular</a>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <a href="{{ route('anses.negative.download.admin', $inscription->user_id) }}" class="btn btn-info">Descargar negativa anses</a>
+                        </div>
+                    @endif
+
                     {{-- <div class="col-md-12">
                         
                             <p><strong>Disponibilidad desde: </strong> 

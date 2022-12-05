@@ -95,6 +95,8 @@ class InscriptionController extends AppBaseController
                     'career_year' => $request->career_year,
                     'establishment' => $request->establishment,
                     'establishment_city' => $request->establishment_city,
+                    'student_certificate' =>$this->uploadFile($request, public_path().'/storage/student_certificate/', 'student_certificate'),
+                    'anses_negative' =>$this->uploadFile($request, public_path().'/storage/anses_negative/', 'anses_negative'),
 
                     'mother_lastname' => $request->mother_lastname,
                     'mother_name' => $request->mother_name,
@@ -403,59 +405,59 @@ class InscriptionController extends AppBaseController
         return false;
     }
 
-    public function getDownloadCv()
+    public function getDownloadStudentCertificate()
     {
   
         $inscription = Inscription::where('user_id', \Auth::user()->id)->first();
 
 
         //PDF file is stored under project/public/download/info.pdf
-        $file= public_path(). '/storage/cv/' . $inscription->cv;
+        $file= public_path(). '/storage/student_certificate/' . $inscription->student_certificate;
 
         $headers = [
             'Content-Type' => 'application/pdf',
          ];
 
-        return response()->download($file, $inscription->lastname .','. $inscription->name .'-cv.pdf', $headers);
+        return response()->download($file, $inscription->lastname .','. $inscription->name .'-student_certificate.pdf', $headers);
     }
 
-    public function getDownloadLifeguardNotebook()
+    public function getDownloadAnsesNegative()
     {
         $inscription = Inscription::where('user_id', \Auth::user()->id)->first();
         //PDF file is stored under project/public/download/info.pdf
-        $file= public_path(). '/storage/lifeguard_notebook/' . $inscription->lifeguard_notebook;
+        $file= public_path(). '/storage/anses_negative/' . $inscription->anses_negative;
 
         $headers = [
             'Content-Type' => 'application/pdf',
          ];
 
-        return response()->download($file, $inscription->lastname .','. $inscription->name .'-libreta.pdf', $headers);
+        return response()->download($file, $inscription->lastname .','. $inscription->name .'-negativaAnses.pdf', $headers);
     }
 
-    public function getDownloadCvAdmin($id)
+    public function getDownloadStudentCertificateAdmin($id)
     {
         $inscription = Inscription::where('user_id', $id)->first();
 
         //PDF file is stored under project/public/download/info.pdf
-        $file= public_path(). '/storage/cv/' . $inscription->cv;
+        $file= public_path(). '/storage/student_certificate/' . $inscription->student_certificate;
 
         $headers = [
             'Content-Type' => 'application/pdf',
          ];
 
-        return response()->download($file, $inscription->lastname .','. $inscription->name .'-cv.pdf', $headers);
+        return response()->download($file, $inscription->lastname .','. $inscription->name .'-student_certificate.pdf', $headers);
     }
 
-    public function getDownloadLifeguardNotebookAdmin($id)
+    public function getDownloadAnsesNegativeAdmin($id)
     {
         $inscription = Inscription::where('user_id', $id)->first();
         //PDF file is stored under project/public/download/info.pdf
-        $file= public_path(). '/storage/lifeguard_notebook/' . $inscription->lifeguard_notebook;
+        $file= public_path(). '/storage/anses_negative/' . $inscription->anses_negative;
 
         $headers = [
             'Content-Type' => 'application/pdf',
          ];
 
-        return response()->download($file, $inscription->lastname .','. $inscription->name .'-libreta.pdf', $headers);
+        return response()->download($file, $inscription->lastname .','. $inscription->name .'-anses_negative.pdf', $headers);
     }
 }

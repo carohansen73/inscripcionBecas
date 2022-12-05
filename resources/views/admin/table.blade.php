@@ -16,6 +16,7 @@
                 <th>Documento</th>
                 <th>Enviado</th>
                 <th>Estado</th>
+                <th>Administrador</th>
                 <th>Observaciones</th>
                 <th>Acciones</th>
             </tr>
@@ -33,6 +34,12 @@
                     <td class="text-success">Aceptada</td>
                 @else
                     <td class="text-danger">Rechazada</td>
+                @endif
+
+                @if($inscription->admin_manages == null)
+                    <td ></td>
+                @else
+                    <td class="text-success">{{$inscription->admin_manages}}</td>
                 @endif
                 
                 @if($inscription->observations == null)

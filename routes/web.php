@@ -26,14 +26,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('inscripciones', 'InscriptionController');
 
-    Route::get('download/cv', 'InscriptionController@getDownloadCv')->name(
-        'download.cv'
+    Route::get('download/alumno', 'InscriptionController@getDownloadStudentCertificate')->name(
+        'download.student.certificate'
     );
 
     Route::get(
-        'download/libreta',
-        'InscriptionController@getDownloadLifeguardNotebook'
-    )->name('download.lifeguardnotebook');
+        'download/negativa',
+        'InscriptionController@getDownloadAnsesNegative'
+    )->name('download.anses.negative');
 
     Route::get('/descargar-listado', function () {
         return response()->download(
@@ -75,14 +75,14 @@ Route::group(['middleware' => 'auth'], function () {
         )->name('observations.update');
 
         Route::get(
-            'cv/download/{id}',
-            'InscriptionController@getDownloadCvAdmin'
-        )->name('cv.download.admin');
+            'certificate/download/{id}',
+            'InscriptionController@getDownloadStudentCertificateAdmin'
+        )->name('student.certificate.download.admin');
 
         Route::get(
-            'libreta/download/{id}',
-            'InscriptionController@getDownloadLifeguardNotebookAdmin'
-        )->name('lifeguardnotebook.download.admin');
+            'negativa/download/{id}',
+            'InscriptionController@getDownloadAnsesNegativeAdmin'
+        )->name('anses.negative.download.admin');
     });
 
 });

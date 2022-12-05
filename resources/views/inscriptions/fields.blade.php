@@ -103,7 +103,7 @@
                     <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Seleccionar</span>
                     <input name="front_document" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
                 </span>
-                @if ($inscription->front_document)
+                @if (isset($inscription) && ($inscription->front_document))
                     <span class="form-control">{{$inscription->front_document}}</span>
                 @else
                     <span class="form-control"></span>
@@ -129,7 +129,7 @@
                     <input name="back_document" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
                 </span>
                 {{-- <span class="form-control"></span> --}}
-                @if ($inscription->back_document)
+                @if (isset($inscription) && ($inscription->back_document))
                     <span class="form-control">{{$inscription->back_document}}</span>
                 @else
                     <span class="form-control"></span>
@@ -145,16 +145,16 @@
           
         </div>
 
-        @if ($inscription->front_document || $inscription->back_document)
+        @if (isset($inscription) && ($inscription->front_document || $inscription->back_document))
             <div class="form-group col-sm-12">
                 <div class="col-md-6">
                     @if ($inscription->front_document)
-                        <img src="{{ asset('storage/front_document/' . $inscription->front_document) }}" alt="..." class="thumbnail" width="640" height="480">
+                        <img src="{{ asset('storage/front_document/' . $inscription->front_document) }}" alt="..." class="thumbnail" width="320" height="240">
                     @endif
                 </div>
                 <div class="col-md-6">
                     @if ($inscription->back_document)
-                        <img src="{{ asset('storage/back_document/' . $inscription->back_document) }}" alt="..." class="thumbnail" width="640" height="480">
+                        <img src="{{ asset('storage/back_document/' . $inscription->back_document) }}" alt="..." class="thumbnail" width="320" height="240">
                     @endif
                 </div>
             </div>
@@ -230,7 +230,53 @@
             {!! Field::text('establishment_city', null, ['label' => 'Ciudad *','maxlength' => 191]) !!}
         </div>
 
-       
+          <!-- alumno regular Field -->
+          <div class="form-group col-sm-6">
+            {!! Form::label('student_certificate', 'Constancia de alumno regular *') !!}
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Seleccionar</span>
+                    <input name="student_certificate" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                </span>
+                @if (isset($inscription) && ($inscription->student_certificate))
+                    <span class="form-control">{{$inscription->student_certificate}}</span>
+                @else
+                    <span class="form-control"></span>
+                @endif
+                
+            </div>
+            <p class="help-block">El formato permitido es pdf.</p>
+            {{-- @if ($errors->has('cv'))
+                <span class="text-danger">
+                    {{ $errors->first('cv') }}
+                </span>
+            @endif --}}
+        </div>
+
+           <!-- Certificación negativa del ANSES Field -->
+           <div class="form-group col-sm-6">
+            {!! Form::label('anses_negative', 'Certificación negativa ante el ANSES *') !!}
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Seleccionar</span>
+                    <input name="anses_negative" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                </span>
+                @if (isset($inscription) && ($inscription->anses_negative))
+                    <span class="form-control">{{$inscription->anses_negative}}</span>
+                @else
+                    <span class="form-control"></span>
+                @endif
+                
+            </div>
+            <p class="help-block">El formato permitido es pdf.</p>
+            @if ($errors->has('cv'))
+                <span class="text-danger">
+                    {{ $errors->first('cv') }}
+                </span>
+            @endif
+        </div>
+
+
     </div>
     <!-- /.box-body -->
 </div>

@@ -40,6 +40,8 @@ class CreateInscriptionsTable extends Migration
             $table->string('career_year');
             $table->string('establishment');
             $table->string('establishment_city');
+            $table->string('student_certificate');
+            $table->string('anses_negative');
             //Datos madre
             $table->string('mother_lastname');
             $table->string('mother_name');

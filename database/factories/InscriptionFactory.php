@@ -30,6 +30,8 @@ $factory->define(Inscription::class, function (Faker $faker) {
         'career_year' => $faker->word,
         'establishment' => $faker->word,
         'establishment_city' => $faker->word,
+        'student_certificate' => $faker->word,
+        'anses_negative' => $faker->word,
 
         'mother_lastname' => $faker->word,
         'mother_name' => $faker->word,

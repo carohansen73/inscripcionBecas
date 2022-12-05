@@ -87,10 +87,13 @@ class AdminController extends Controller
     {
 
         $inscription = Inscription::findOrFail($id);
+        $administrador = \Auth::user()->email;
+      
         if ($request->status != null) {
             $inscription->update([
                 'status' => $request->status,
-                'observations' => $request->observations
+                'observations' => $request->observations,
+                'admin_manages' => $administrador
             ]);
             Flash::success('La observación se agregó correctamente.');
             return redirect(route('inscriptions.list'));
